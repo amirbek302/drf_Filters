@@ -43,7 +43,7 @@
 
 3. **Запустите проект:**
    ```bash
-   *python main.py run server*
+   python main.py run server
    ```
 ---
 
