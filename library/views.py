@@ -61,14 +61,6 @@ class BooksAPIViewByAuthor(APIView):
 
 class BooksAPIViewByCategory(APIView):
     def get(self, request, pk):
-        book = Book.objects.get(pk=pk)
-        serializer = BookSerializer(book)
+        books = Book.objects.filter(category_id=pk)
+        serializer = BookSerializer(books, many=True)
         return Response(serializer.data)
-
-    def patch(self, request, pk):
-        book = Book.objects.get(pk=pk)
-        serializer = BookSerializer(book, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
